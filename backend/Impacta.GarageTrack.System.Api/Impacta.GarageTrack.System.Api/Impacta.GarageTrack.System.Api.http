@@ -1,0 +1,6 @@
+@Impacta.GarageTrack.System.Api_HostAddress = http://localhost:5082
+
+GET {{Impacta.GarageTrack.System.Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
