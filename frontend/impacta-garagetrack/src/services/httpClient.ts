@@ -1,7 +1,7 @@
 import { getAuthStateFromStorage } from './storage'
 import type { ApiResponse } from '../types/api'
 
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL ?? 'https://localhost:65446'
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL ?? 'https://localhost:62470'
 
 export class HttpError extends Error {
   readonly status: number
@@ -69,4 +69,11 @@ export const httpClient = {
       method: 'POST',
       body: body ? JSON.stringify(body) : undefined,
     }),
+  put: <T>(path: string, body?: unknown, options?: RequestOptions) =>
+    request<T>(path, {
+      ...options,
+      method: 'PUT',
+      body: body ? JSON.stringify(body) : undefined,
+    }),
+  delete: <T>(path: string, options?: RequestOptions) => request<T>(path, { ...options, method: 'DELETE' }),
 }

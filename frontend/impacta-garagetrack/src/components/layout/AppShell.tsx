@@ -32,6 +32,7 @@ export function AppShell() {
       <nav className="app-nav">
         <NavLink to="/parking">Estacionamentos</NavLink>
         <NavLink to="/parking/new">Cadastrar Entrada</NavLink>
+        <NavLink to="/parkingtax">Tarifas</NavLink>
       </nav>
 
       <main className="app-main">

@@ -1,11 +1,14 @@
 ﻿using Impacta.GarageTrack.System.Api.Api.Parking.Endpoints;
+using Impacta.GarageTrack.System.Api.Api.ParkingTax.Endpoints;
 using Impacta.GarageTrack.System.Api.Api.User.Endpoints;
 using Impacta.GarageTrack.System.Api.Application.Kernel;
 using Impacta.GarageTrack.System.Api.Domain.Company.Repositories;
 using Impacta.GarageTrack.System.Api.Domain.Parking.Repositories;
+using Impacta.GarageTrack.System.Api.Domain.ParkingTax.Repositories;
 using Impacta.GarageTrack.System.Api.Infraestructure.Database;
 using Impacta.GarageTrack.System.Api.Infraestructure.Database.Repositories;
 using Impacta.GarageTrack.System.Api.Infraestructure.Parking;
+using Impacta.GarageTrack.System.Api.Infraestructure.ParkingTax;
 using Impacta.GarageTrack.System.Api.Infraestructure.User;
 using Impacta.GarageTrack.System.Api.Infraestructure.User.Services;
 using Microsoft.EntityFrameworkCore;
@@ -23,9 +26,11 @@ namespace Impacta.GarageTrack.System.Api.Infraestructure
 
             services.AddScoped<ICompanyRepository, CompanyRepository>();
             services.AddScoped<IParkingRepository, ParkingRepository>();
+            services.AddScoped<IParkingTaxRepository, ParkingTaxRepository>();
 
             services.AddUserDependencies();
             services.AddParkingDependencies();
+            services.AddParkingTaxDependencies();
             services.AddScoped<IUnityOfWork, UnityOfWork>();
         }
 
@@ -34,6 +39,7 @@ namespace Impacta.GarageTrack.System.Api.Infraestructure
         {
             app.MapAuthEndpoints();
             app.MapParkingEndpoints();
+            app.MapParkingTaxEndpoints();
         }
     }
 }

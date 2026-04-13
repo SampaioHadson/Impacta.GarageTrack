@@ -5,6 +5,8 @@ import { LoginPage } from '../pages/LoginPage'
 import { ParkingCreatePage } from '../pages/parking/ParkingCreatePage'
 import { ParkingDetailPage } from '../pages/parking/ParkingDetailPage'
 import { ParkingListPage } from '../pages/parking/ParkingListPage'
+import { ParkingTaxFormPage } from '../pages/parkingTax/ParkingTaxFormPage'
+import { ParkingTaxListPage } from '../pages/parkingTax/ParkingTaxListPage'
 
 export function AppRouter() {
   return (
@@ -23,6 +25,9 @@ export function AppRouter() {
           <Route path="/parking" element={<ParkingListPage />} />
           <Route path="/parking/new" element={<ParkingCreatePage />} />
           <Route path="/parking/:id" element={<ParkingDetailPage />} />
+          <Route path="/parkingtax" element={<ParkingTaxListPage />} />
+          <Route path="/parkingtax/new" element={<ParkingTaxFormPage />} />
+          <Route path="/parkingtax/:id/edit" element={<ParkingTaxFormPage />} />
         </Route>
 
         <Route path="*" element={<Navigate to="/parking" replace />} />
