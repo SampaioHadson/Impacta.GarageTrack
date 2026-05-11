@@ -375,6 +375,42 @@ a {
   justify-content: flex-end;
 }
 
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(16, 33, 23, 0.45);
+  display: grid;
+  place-items: center;
+  padding: 1.5rem;
+  z-index: 100;
+}
+
+.modal {
+  background: var(--bg-panel);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  box-shadow: var(--shadow);
+  padding: 1.75rem;
+  width: min(100%, 420px);
+  display: grid;
+  gap: 1rem;
+}
+
+.modal-title {
+  font-size: 1.1rem;
+}
+
+.modal-message {
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.55rem;
+}
+
 @media (max-width: 860px) {
   .app-header,
   .section-header {

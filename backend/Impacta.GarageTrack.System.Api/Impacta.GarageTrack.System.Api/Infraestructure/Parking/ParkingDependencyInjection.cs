@@ -8,6 +8,7 @@ namespace Impacta.GarageTrack.System.Api.Infraestructure.Parking
         public static void AddParkingDependencies(this IServiceCollection services)
         {
             services.AddScoped<IAddParkingCommand, AddParkingCommand>();
+            services.AddScoped<ICloseParkingCommand, CloseParkingCommand>();
             services.AddScoped<IGetParkingByIdQuery, GetParkingByIdQuery>();
             services.AddScoped<IListParkingQuery, ListParkingQuery>();
         }

@@ -17,13 +17,14 @@ namespace Impacta.GarageTrack.System.Api.Application.ParkingTax.Commands
         {
             var entity = await _unityOfWork.ParkingTaxRepository.GetByIdAsync(command.Id);
             if (entity is null || !entity.IsActive)
-                return Result<ParkingTaxItemVo>.Failure("Tarifa não encontrada.");
+                return Result<ParkingTaxItemVo>.Failure("Tarifa nï¿½o encontrada.");
 
             if (entity.CompanyId != command.CompanyId)
-                return Result<ParkingTaxItemVo>.Failure("Tarifa não pertence à empresa informada.");
+                return Result<ParkingTaxItemVo>.Failure("Tarifa nï¿½o pertence ï¿½ empresa informada.");
 
             entity.Type = command.Type;
             entity.Minutes = command.Minutes;
+            entity.FromHours = command.FromHours;
             entity.Value = command.Value;
             entity.UpdatedAt = DateTime.Now;
 
@@ -34,7 +35,7 @@ namespace Impacta.GarageTrack.System.Api.Application.ParkingTax.Commands
             return Result<ParkingTaxItemVo>.Success(result!);
         }
 
-        public record Request(long Id, ParkingTaxType Type, int? Minutes, decimal Value, long CompanyId);
+        public record Request(long Id, ParkingTaxType Type, int? Minutes, int? FromHours, decimal Value, long CompanyId);
     }
 
     public interface IUpdateParkingTaxCommand : ICommand<UpdateParkingTaxCommand.Request, Result<ParkingTaxItemVo>>

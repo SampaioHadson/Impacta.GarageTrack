@@ -67,6 +67,24 @@ namespace Impacta.GarageTrack.System.Api.Api.Parking.Endpoints
                     ? TypedResults.Ok(new ResponseBase<ParkingItemVo>(result.Value!))
                     : (IResult)TypedResults.UnprocessableEntity(new ResponseBase<ParkingItemVo>(result.ErrorMessage!));
             });
+
+            group.MapPut("{id:long}/close", async
+                (
+                    HttpContext context,
+                    [FromServices] ICloseParkingCommand handler,
+                    [FromRoute] long id
+                ) =>
+            {
+                var user = context.GetCurrentUser();
+                if (user is null)
+                    return TypedResults.Unauthorized();
+
+                var commandRequest = new CloseParkingCommand.Request(id, user.UserId, user.CompanyId);
+                var result = await handler.HandleAsync(commandRequest);
+                return result.IsSuccess
+                    ? TypedResults.Ok(new ResponseBase<CloseParkingResultVo>(result.Value!))
+                    : (IResult)TypedResults.UnprocessableEntity(new ResponseBase<CloseParkingResultVo>(result.ErrorMessage!));
+            });
         }
     }
 }

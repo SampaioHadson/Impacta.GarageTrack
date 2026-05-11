@@ -13,7 +13,7 @@ namespace Impacta.GarageTrack.System.Api.Api.ParkingTax.Endpoints
         public static void MapParkingTaxEndpoints(this WebApplication app)
         {
             var group = app.MapGroup("ParkingTax")
-                .WithDescription("Endpoints de configuração de tarifas do estacionamento")
+                .WithDescription("Endpoints de configuraï¿½ï¿½o de tarifas do estacionamento")
                 .WithTags("ParkingTax");
 
             group.MapGet(string.Empty, async
@@ -44,7 +44,7 @@ namespace Impacta.GarageTrack.System.Api.Api.ParkingTax.Endpoints
                 if (user is null)
                     return TypedResults.Unauthorized();
 
-                var commandRequest = new AddParkingTaxCommand.Request(request.Type, request.Minutes, request.Value, user.CompanyId);
+                var commandRequest = new AddParkingTaxCommand.Request(request.Type, request.Minutes, request.FromHours, request.Value, user.CompanyId);
                 var result = await handler.HandleAsync(commandRequest);
                 return result.IsSuccess
                     ? TypedResults.Ok(new ResponseBase<ParkingTaxItemVo>(result.Value!))
@@ -63,7 +63,7 @@ namespace Impacta.GarageTrack.System.Api.Api.ParkingTax.Endpoints
                 if (user is null)
                     return TypedResults.Unauthorized();
 
-                var commandRequest = new UpdateParkingTaxCommand.Request(id, request.Type, request.Minutes, request.Value, user.CompanyId);
+                var commandRequest = new UpdateParkingTaxCommand.Request(id, request.Type, request.Minutes, request.FromHours, request.Value, user.CompanyId);
                 var result = await handler.HandleAsync(commandRequest);
                 return result.IsSuccess
                     ? TypedResults.Ok(new ResponseBase<ParkingTaxItemVo>(result.Value!))

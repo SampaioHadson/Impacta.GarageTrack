@@ -25,7 +25,8 @@ namespace Impacta.GarageTrack.System.Api.Infraestructure.Database.Repositories
                     FinishedByUserId = s.FinishedByUser.Id,
                     FinishedByUserName = s.FinishedByUser.Name,
                     EntryTime = s.EntryTime,
-                    ExitTime = s.ExitTime
+                    ExitTime = s.ExitTime,
+                    TotalValue = s.TotalValue
                 })
                 .FirstOrDefaultAsync(); 
         }
@@ -44,7 +45,8 @@ namespace Impacta.GarageTrack.System.Api.Infraestructure.Database.Repositories
                     FinishedByUserId = s.FinishedByUser.Id,
                     FinishedByUserName = s.FinishedByUser.Name,
                     EntryTime = s.EntryTime,
-                    ExitTime = s.ExitTime
+                    ExitTime = s.ExitTime,
+                    TotalValue = s.TotalValue
                 })
                 .ToListAsync();
         }

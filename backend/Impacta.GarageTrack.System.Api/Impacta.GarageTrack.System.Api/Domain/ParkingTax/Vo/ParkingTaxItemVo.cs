@@ -7,6 +7,7 @@ namespace Impacta.GarageTrack.System.Api.Domain.ParkingTax.Vo
         public long Id { get; set; }
         public ParkingTaxType Type { get; set; }
         public int? Minutes { get; set; }
+        public int? FromHours { get; set; }
         public decimal Value { get; set; }
         public long CompanyId { get; set; }
         public DateTime CreatedAt { get; set; }

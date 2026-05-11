@@ -26,6 +26,7 @@ namespace Impacta.GarageTrack.System.Api.Domain.Parking.Entities
         public string Color { get; set; }
         public DateTime EntryTime { get; set; }
         public DateTime? ExitTime { get; set; }
+        public decimal? TotalValue { get; set; }
         public long CompanyId { get; set; }
         public long CreatedByUserId { get; set; }
         public Domain.Users.Entities.User? CreatedByUser { get; set; }

@@ -3,6 +3,7 @@ using System;
 using Impacta.GarageTrack.System.Api.Infraestructure.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Impacta.GarageTrack.System.Api.Migrations
 {
     [DbContext(typeof(GarageTrackContext))]
-    partial class GarageTrackContextModelSnapshot : ModelSnapshot
+    [Migration("20260511003338_ParkingTaxAfterHourTime")]
+    partial class ParkingTaxAfterHourTime
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -88,9 +91,6 @@ namespace Impacta.GarageTrack.System.Api.Migrations
                     b.Property<string>("Plate")
                         .IsRequired()
                         .HasColumnType("text");
-
-                    b.Property<decimal?>("TotalValue")
-                        .HasColumnType("numeric(18,2)");
 
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("timestamp without time zone");

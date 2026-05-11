@@ -35,7 +35,7 @@ export function ParkingTaxListPage() {
   }, [])
 
   async function handleDelete(tax: ParkingTax) {
-    const label = `${PARKING_TAX_TYPE_LABELS[tax.type]}${tax.minutes ? ` (${tax.minutes} min)` : ''}`
+    const label = `${PARKING_TAX_TYPE_LABELS[tax.type]}${tax.minutes ? ` (${tax.minutes} min)` : ''}${tax.fromHours ? ` (a partir de ${tax.fromHours}h)` : ''}`
     if (!window.confirm(`Deseja excluir a tarifa "${label}"?`)) return
 
     setDeletingId(tax.id)
@@ -89,6 +89,7 @@ export function ParkingTaxListPage() {
               <tr>
                 <th>Tipo</th>
                 <th>Tempo Até (min)</th>
+                <th>A partir de (h)</th>
                 <th>Valor</th>
                 <th aria-label="Ações" />
               </tr>
@@ -98,6 +99,7 @@ export function ParkingTaxListPage() {
                 <tr key={tax.id}>
                   <td>{PARKING_TAX_TYPE_LABELS[tax.type]}</td>
                   <td>{tax.minutes ?? '-'}</td>
+                  <td>{tax.fromHours ?? '-'}</td>
                   <td>
                     {tax.value.toLocaleString('pt-BR', {
                       style: 'currency',

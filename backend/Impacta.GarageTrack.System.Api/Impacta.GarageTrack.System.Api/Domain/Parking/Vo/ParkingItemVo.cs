@@ -7,6 +7,7 @@
         public string? Color { get; set; }
         public DateTime EntryTime { get; set; }
         public DateTime? ExitTime { get; set; }
+        public decimal? TotalValue { get; set; }
         public long CreatedByUserId { get; set; }
         public string? CreatedByUserName { get; set; }
         public long? FinishedByUserId { get; set; }

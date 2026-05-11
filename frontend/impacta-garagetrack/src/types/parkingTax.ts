@@ -4,6 +4,7 @@ export interface ParkingTax {
   id: number
   type: ParkingTaxType
   minutes: number | null
+  fromHours: number | null
   value: number
   companyId: number
   createdAt: string
@@ -13,6 +14,7 @@ export interface ParkingTax {
 export interface ParkingTaxRequest {
   type: ParkingTaxType
   minutes: number | null
+  fromHours: number | null
   value: number
 }
 

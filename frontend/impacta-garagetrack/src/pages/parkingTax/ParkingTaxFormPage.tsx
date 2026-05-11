@@ -12,15 +12,17 @@ const TAX_TYPES: ParkingTaxType[] = ['Hour', 'AfterHour', 'Daily']
 interface FormState {
   type: ParkingTaxType
   minutes: string
+  fromHours: string
   value: string
 }
 
-const EMPTY_FORM: FormState = { type: 'Hour', minutes: '', value: '' }
+const EMPTY_FORM: FormState = { type: 'Hour', minutes: '', fromHours: '', value: '' }
 
 function taxToForm(tax: ParkingTax): FormState {
   return {
     type: tax.type,
     minutes: tax.minutes !== null ? String(tax.minutes) : '',
+    fromHours: tax.fromHours !== null ? String(tax.fromHours) : '',
     value: String(tax.value),
   }
 }
@@ -70,6 +72,7 @@ export function ParkingTaxFormPage() {
       ...prev,
       type,
       minutes: type === 'Hour' ? prev.minutes : '',
+      fromHours: type === 'Daily' ? prev.fromHours : '',
     }))
   }
 
@@ -91,6 +94,14 @@ export function ParkingTaxFormPage() {
       return
     }
 
+    const parsedFromHours =
+      form.type === 'Daily' ? parseInt(form.fromHours, 10) : null
+
+    if (form.type === 'Daily' && (Number.isNaN(parsedFromHours as number) || (parsedFromHours as number) <= 0)) {
+      setError('Informe a partir de quantas horas a tarifa diária será utilizada.')
+      return
+    }
+
     setSubmitting(true)
 
     try {
@@ -98,12 +109,14 @@ export function ParkingTaxFormPage() {
         await parkingTaxService.update(Number(id), {
           type: form.type,
           minutes: parsedMinutes,
+          fromHours: parsedFromHours,
           value: parsedValue,
         })
       } else {
         await parkingTaxService.create({
           type: form.type,
           minutes: parsedMinutes,
+          fromHours: parsedFromHours,
           value: parsedValue,
         })
       }
@@ -162,6 +175,18 @@ export function ParkingTaxFormPage() {
                 value={form.minutes}
                 onChange={(e) => setForm((prev) => ({ ...prev, minutes: e.target.value }))}
                 placeholder="60"
+              />
+            ) : null}
+
+            {form.type === 'Daily' ? (
+              <Input
+                id="fromHours"
+                label="A partir de (horas)"
+                type="number"
+                min={1}
+                value={form.fromHours}
+                onChange={(e) => setForm((prev) => ({ ...prev, fromHours: e.target.value }))}
+                placeholder="12"
               />
             ) : null}
 

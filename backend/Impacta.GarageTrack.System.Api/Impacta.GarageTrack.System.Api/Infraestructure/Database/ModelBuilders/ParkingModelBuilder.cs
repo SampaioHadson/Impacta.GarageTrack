@@ -7,6 +7,7 @@ namespace Impacta.GarageTrack.System.Api.Infraestructure.Database.ModelBuilders
         public void Configure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder<Domain.Parking.Entities.Parking> builder)
         {
             builder.HasKey(x => x.Id);
+            builder.Property(x => x.TotalValue).HasColumnType("numeric(18,2)");
         }
     }
 }

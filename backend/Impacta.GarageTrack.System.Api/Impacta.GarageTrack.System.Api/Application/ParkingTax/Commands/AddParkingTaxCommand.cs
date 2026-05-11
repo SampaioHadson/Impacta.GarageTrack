@@ -16,7 +16,7 @@ namespace Impacta.GarageTrack.System.Api.Application.ParkingTax.Commands
 
         public async Task<Result<ParkingTaxItemVo>> HandleAsync(Request command)
         {
-            var entity = new ParkingTaxEntity(command.Type, command.Minutes, command.Value, command.CompanyId);
+            var entity = new ParkingTaxEntity(command.Type, command.Minutes, command.FromHours, command.Value, command.CompanyId);
             await _unityOfWork.ParkingTaxRepository.AddAsync(entity);
             await _unityOfWork.SaveChangesAsync();
 
@@ -24,7 +24,7 @@ namespace Impacta.GarageTrack.System.Api.Application.ParkingTax.Commands
             return Result<ParkingTaxItemVo>.Success(result!);
         }
 
-        public record Request(ParkingTaxType Type, int? Minutes, decimal Value, long CompanyId);
+        public record Request(ParkingTaxType Type, int? Minutes, int? FromHours, decimal Value, long CompanyId);
     }
 
     public interface IAddParkingTaxCommand : ICommand<AddParkingTaxCommand.Request, Result<ParkingTaxItemVo>>
